@@ -17,6 +17,7 @@ npm install snowfall-background
 ```javascript
 import React, { useEffect } from "react";
 import startSnowfall from "snowfall-background";
+Import SnowflakeImage from "./path/to/snowflake.png";
 
 const SnowfallPage = () => {
   useEffect(() => {
@@ -25,7 +26,7 @@ const SnowfallPage = () => {
       snowflakeCount: 200,
       sizeRange: [5, 25],
       animationDurationRange: [30, 60],
-      snowflakeImage: "./path/to/snowflake.png",
+      snowflakeImage: SnowflakeImage,
     });
 
     // Clean up snowfall when the component unmounts
@@ -65,6 +66,53 @@ export default SnowfallPage;
   </body>
 </html>
 ```
+
+## Handling Snowflake Positioning
+
+### Accumulation at Top of Page
+
+If you notice snowflakes accumulating at the top of the page before falling, you have several options:
+
+1. **React Component Styling**:
+
+   ```jsx
+   const SnowfallPage = () => {
+     useEffect(() => {
+       const snowfall = startSnowfall({
+         // ... other options
+       });
+
+       // Optional: Add custom styling
+       const style = document.createElement("style");
+       style.textContent = `
+         .snowflake {
+           will-change: transform, opacity;
+           opacity: 0;
+         }
+       `;
+       document.head.appendChild(style);
+
+       return () => {
+         snowfall.destroy();
+         document.head.removeChild(style);
+       };
+     }, []);
+
+     return <div>Your content here</div>;
+   };
+   ```
+
+2. **Z-Index Solution**:
+   If you have a navigation banner or header, ensure it has a higher z-index:
+   ```css
+   .snowflake {
+     z-index: 1;
+   }
+   .navigation-banner {
+     z-index: 10;
+     position: relative;
+   }
+   ```
 
 ## API Options
 

@@ -43,7 +43,7 @@ class Snowfall {
       
             .snowflake {
               position: fixed;
-              top: -100;
+              top: 0;
               left: 0;
               pointer-events: none;
               will-change: transform, opacity;

@@ -1,6 +1,6 @@
 {
   "name": "snowfall-background",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A simple snowfall effect for any website",
   "main": "snowfall.js",
   "files": [
