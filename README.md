@@ -1,37 +1,92 @@
-# JS-React-Snowfall-Overlay
-A lightweight, customizable React snowfall overlay for winter-themed web applications.
+# Snowfall Background
+
+A lightweight JavaScript package that adds a beautiful snowfall animation to your web page with customizable options.
 
 ## Installation
 
+Install the package using npm:
+
 ```bash
-npm install js-react-snowfall-overlay
+npm install snowfall-background
 ```
 
 ## Usage
 
-```jsx
-import React from 'react';
-import SnowfallOverlay from 'js-react-snowfall-overlay';
-import snowflakeSvg from './path/to/snowflake.svg';
+### For React Projects
 
-function App() {
-  return (
-    <div>
-      <SnowfallOverlay 
-        count={150}  // Number of snowflakes
-        snowflakeSvg={snowflakeSvg}
-      />
-      {/* Rest of your app */}
-    </div>
-  );
-}
+```javascript
+import React, { useEffect } from "react";
+import startSnowfall from "snowfall-background";
+
+const SnowfallPage = () => {
+  useEffect(() => {
+    // Start snowfall with custom options
+    const snowfall = startSnowfall({
+      snowflakeCount: 200,
+      sizeRange: [5, 25],
+      animationDurationRange: [30, 60],
+      snowflakeImage: "./path/to/snowflake.png",
+    });
+
+    // Clean up snowfall when the component unmounts
+    return () => {
+      snowfall.destroy();
+    };
+  }, []);
+
+  return <div>Your content here</div>;
+};
+
+export default SnowfallPage;
 ```
 
-## Props
+### For Vanilla HTML/JavaScript
 
-- `count`: Number of snowflakes (default: 150)
-- `snowflakeSvg`: SVG file for snowflakes
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Snowfall Background</title>
+    <script type="module">
+      import startSnowfall from "https://unpkg.com/snowfall-background/snowfall.js";
+
+      // Start snowfall when the page loads
+      window.addEventListener("load", () => {
+        const snowfall = startSnowfall({
+          snowflakeCount: 150,
+          sizeRange: [8, 16],
+          snowflakeImage: "./path/to/snowflake.png",
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Snowy Page</h1>
+  </body>
+</html>
+```
+
+## API Options
+
+- **snowflakeCount** (default: 150): Number of snowflakes
+- **sizeRange** (default: [8, 16]): Snowflake size range (pixels)
+- **animationDurationRange** (default: [25, 50]): Animation duration range (seconds)
+- **container** (default: `document.body`): Container for snowflakes
+- **snowflakeImage**: Custom snowflake image path
+
+## Snowflake Image
+
+- Include a custom snowflake image by providing its path
+- Recommended image type: PNG with transparent background
+- Default image is included in the package
+
+## Methods
+
+- `startSnowfall(options)`: Initializes snowfall
+- `snowfall.destroy()`: Removes all snowflakes
 
 ## License
 
-MIT
+MIT License
+
+**Created by Eugen Taranowski**

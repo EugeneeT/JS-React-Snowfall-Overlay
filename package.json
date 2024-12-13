@@ -1,0 +1,14 @@
+{
+  "name": "snowfall-background",
+  "version": "1.0.0",
+  "description": "A simple snowfall effect for any website",
+  "main": "snowfall.js",
+  "files": [
+    "snowfall.js",
+    "snowflake.png",
+    "README.md"
+  ],
+  "keywords": ["snowfall", "background", "javascript", "animation"],
+  "author": "Eugen Taranowski",
+  "license": "MIT"
+}
